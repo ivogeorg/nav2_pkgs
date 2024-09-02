@@ -1,4 +1,4 @@
-### nav2_pkgs
+### `nav2_pkgs`
 
 #### Overview
 
