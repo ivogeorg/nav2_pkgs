@@ -50,8 +50,8 @@ controller_server:
       trans_stopped_velocity: 0.25
       short_circuit_trajectory_evaluation: True
       stateful: True
-      # critics: ["RotateToGoal", "Oscillation", "BaseObstacle", "GoalAlign", "PathAlign", "PathDist", "GoalDist"]
-      critics: ["RotateToGoal", "Oscillation", "ObstacleFootprint", "GoalAlign", "PathAlign", "PathDist", "GoalDist"]
+      critics: ["RotateToGoal", "Oscillation", "BaseObstacle", "GoalAlign", "PathAlign", "PathDist", "GoalDist"]
+      # critics: ["RotateToGoal", "Oscillation", "ObstacleFootprint", "GoalAlign", "PathAlign", "PathDist", "GoalDist"]
       BaseObstacle.scale: 0.02
       PathAlign.scale: 32.0
       PathAlign.forward_point_distance: 0.1
@@ -78,6 +78,7 @@ local_costmap:
       robot_radius: 0.4
       # footprint: '[ [0.65, 0.65], [0.65, -0.65], [-0.65, -0.65], [-0.65, 0.65] ]'
       plugins: ["voxel_layer", "inflation_layer"]
+      filters: ["keepout_filter"]
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
         cost_scaling_factor: 3.0
@@ -105,6 +106,11 @@ local_costmap:
       static_layer:
         map_subscribe_transient_local: True
       always_send_full_costmap: True
+      keepout_filter:
+        plugin: "nav2_costmap_2d::KeepoutFilter"
+        enabled: True
+        filter_info_topic: "/costmap_filter_info"
+
 
   # Not included in course
   # local_costmap_client:
